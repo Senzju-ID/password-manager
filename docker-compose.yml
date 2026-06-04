@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   pm-workspace:
-    image: chialab/php-dev:8.3-v8
+    image: jkaninda/laravel-tailwindcss:php8.3
     container_name: pm_workspace
     restart: unless-stopped
     ports:
@@ -15,4 +13,3 @@ services:
     environment:
       - DB_HOST=172.17.0.1
       - DB_DATABASE=password_manager
-      
