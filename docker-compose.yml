@@ -1,15 +1,25 @@
 services:
-  pm-workspace:
-    image: jkaninda/laravel-tailwindcss:php8.3
-    container_name: pm_workspace
+  pm-backend:
+    image: php:8.3-fpm
+    container_name: pm_backend
     restart: unless-stopped
     ports:
       - "8000:8000"
-      - "3000:3000"
     volumes:
-      - .:/app
+      - ./backend:/app
     working_dir: /app
-    command: sh -c "cd backend && php artisan serve --host=0.0.0.0 --port=8000 & cd frontend && npm run dev"
+    command: php artisan serve --host=0.0.0.0 --port=8000
     environment:
       - DB_HOST=172.17.0.1
       - DB_DATABASE=password_manager
+
+  pm-frontend:
+    image: node:20-slim
+    container_name: pm_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
