@@ -1,14 +1,10 @@
-'use server';
+import Header from "@/components/layout/header";
 
-import Header from '@/components/layout/header';
-
-export default async function Page() {
-    return (
-        <div>
-            <Header />
-            <div className="h-screen w-full flex justify-center items-center">
-     <h3>HALOO WORLDDD</h3>
-            </div>
-        </div>
-    );
+export default function Page() {
+	return (
+		<div className="h-screen w-full bg-blue-100">
+			<Header />
+			<div className="flex h-10 bg-red-400  justify-center items-center">halllooo</div>
+		</div>
+	);
 }
