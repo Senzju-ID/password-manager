@@ -1,7 +1,9 @@
-export default function Page() {
-  return(
-    <div>
-    
-    </div>
-  )
+import FormLogin from "@/components/layout/formLogin"
+
+export default function LoginPage() {
+    return (
+        <div className="">
+            <FormLogin/>
+        </div>
+    );
 }
