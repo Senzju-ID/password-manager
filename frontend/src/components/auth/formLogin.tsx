@@ -1,12 +1,25 @@
 "use client";
 import FormUiAuth from "@/components/ui/formUiAuth";
+import API from "@/lib/axios";
 
 const FormLogin = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await API.post("/auth/login", data);
+    } catch (error) {
+      console.error("Error occurred while logging in:", error);
+    }
   };
   return (
-    <FormUiAuth onSubmit={handleSubmit} PText="Welcome Back! Please login to your account.">
+    <FormUiAuth
+      onSubmit={handleSubmit}
+      PText="Welcome Back! Please login to your account."
+    >
       {/* Username Input Field */}
       <div className="mb-2">
         <label
@@ -78,6 +91,24 @@ const FormLogin = () => {
         >
           Login
         </button>
+      </div>
+      {/* Dont Have Account Field */}
+      <div className="mt-4 text-center select-none">
+        <p className="text-sm text-secondary">
+          Don't have an account?{" "}
+          <a href="/auth/register" className="text-accent hover:underline">
+            Register here
+          </a>
+        </p>
+      </div>
+      {/* Forgot Password Field */}
+      <div className="select-none text-center">
+        <a
+          href="/auth/forgot-password"
+          className="text-sm text-accent hover:underline"
+        >
+          Forgot your password?
+        </a>
       </div>
     </FormUiAuth>
   );

@@ -139,8 +139,17 @@ const FormRegister = () => {
             Register
           </button>
         </div>
-    </FormUiAuth>
-  );
+        {/* Already Have Account Field */}
+        <div className="mt-4 text-center select-none">
+          <p className="text-sm text-secondary">
+            Already have an account?{" "}
+            <a href="/auth/login" className="text-accent hover:underline">
+              Login here
+            </a>
+          </p>
+        </div>
+      </FormUiAuth>
+    );
 };
 
 export default FormRegister;

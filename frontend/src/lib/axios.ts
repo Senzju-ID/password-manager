@@ -1,6 +1,6 @@
-import axios, { axiosInstance } from 'axios'
+import axios, { AxiosInstance } from 'axios'
 
-const Api:axiosInstance = axios.create({
+const API:AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
   withXSRFToken: true,
@@ -11,4 +11,4 @@ const Api:axiosInstance = axios.create({
   }
 })
 
-export default Api
+export default API
