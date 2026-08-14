@@ -1,0 +1,22 @@
+{
+  "name": "PHP 8.4 Latest",
+  "image": "mcr.microsoft.com/devcontainers/php:1-8.4",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "ikappas.composer"
+      ],
+      "settings": {
+        "php.validate.enable": true,
+        "php.validate.executablePath": "/usr/local/bin/php"
+      }
+    }
+  },
+  "forwardPorts": [8000, 8080],
+  "postCreateCommand": "sudo chmod -R 775 /workspaces/${localWorkspaceFolderBasename} && composer install",
+  "remoteUser": "vscode"
+}   
