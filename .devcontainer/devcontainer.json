@@ -2,24 +2,15 @@
   "name": "Laravel 13 & Next.js 16 Full Stack",
   "image": "mcr.microsoft.com/devcontainers/php:1-8.4",
   "features": {
-    "ghcr.io/devcontainers/features/node:2": {
-      "version": "22",
-      "nodeGypDependencies": true
+    "ghcr.io/devcontainers/features/node:2.1.0": {
+      "version": "22" 
     },
     "ghcr.io/devcontainers/features/git:1": {
       "version": "latest",
       "ppa": "false"
     },
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers-contrib/features/composer:2": {
-      "version": "latest"
-    }
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "overrideFeatureInstallOrder": [
-    "ghcr.io/devcontainers/features/node",
-    "ghcr.io/devcontainers-contrib/features/composer"
-  ],
   "customizations": {
     "vscode": {
       "extensions": [
@@ -27,15 +18,12 @@
         "laravel.vscode-laravel",
         "onecentlin.laravel-blade",
         "onecentlin.laravel-extra-intellisense",
-        "onecentlin.laravel-snippets",
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "dsznajder.es7-react-js-snippets",
         "formulahendry.auto-rename-tag",
-        "streetsidesoftware.code-spell-checker",
-        "cweijan.vscode-mysql-client2",
-        "ms-vscode.vscode-typescript-next"
+        "Continue.continue"
       ],
       "settings": {
         "workbench.secondarySideBar.defaultVisibility": "hidden",
@@ -53,83 +41,18 @@
           "php": "html",
           "blade": "html"
         },
-        "tailwindCSS.experimental.classRegex": [
-          ["class\\s*=\\s*['\"]([^'\"]*)['\"]"]
-        ],
         "editor.quickSuggestions": {
           "strings": true
         },
-        "intelephense.environment.phpVersion": "8.4",
-        "intelephense.stubs": [
-          "apache",
-          "bcmath",
-          "calendar",
-          "Core",
-          "ctype",
-          "curl",
-          "date",
-          "dom",
-          "fileinfo",
-          "filter",
-          "ftp",
-          "gd",
-          "hash",
-          "iconv",
-          "json",
-          "libxml",
-          "mbstring",
-          "mysqli",
-          "mysqlnd",
-          "openssl",
-          "pcre",
-          "PDO",
-          "pdo_mysql",
-          "pdo_pgsql",
-          "pdo_sqlite",
-          "Phar",
-          "SimpleXML",
-          "soap",
-          "sockets",
-          "sodium",
-          "SPL",
-          "standard",
-          "superglobals",
-          "tokenizer",
-          "xml",
-          "xmlreader",
-          "xmlwriter",
-          "xsl",
-          "zip",
-          "zlib"
-        ],
-        "laravel-blade.format.enable": true
+        "intelephense.environment.phpVersion": "8.4"
       }
     }
   },
   "forwardPorts": [8000, 3000, 5173],
-  "portsAttributes": {
-    "8000": {
-      "label": "Laravel",
-      "onAutoForward": "notify"
-    },
-    "3000": {
-      "label": "Next.js",
-      "onAutoForward": "notify"
-    },
-    "5173": {
-      "label": "Vite",
-      "onAutoForward": "silent"
-    }
-  },
-  "postCreateCommand": "sudo chown -R vscode:vscode /workspaces && composer install && corepack enable && corepack prepare pnpm@latest --activate && pnpm install",
-  "postStartCommand": "echo 'Dev Container ready for Laravel 13 & Next.js 16 development!'",
+  "postCreateCommand": "sudo chown -R vscode:vscode /workspaces && corepack enable && corepack prepare pnpm@latest --activate",
   "remoteUser": "vscode",
   "mounts": [
     "source=pnpm-store,target=/home/vscode/.local/share/pnpm,type=volume",
-    "source=composer-cache,target=/home/vscode/.composer/cache,type=volume",
-    "source=bash-history,target=/home/vscode/.bash_history,type=volume"
-  ],
-  "containerEnv": {
-    "COMPOSER_ALLOW_SUPERUSER": "1"
-  }
+    "source=composer-cache,target=/home/vscode/.composer/cache,type=volume"
+  ]
 }   

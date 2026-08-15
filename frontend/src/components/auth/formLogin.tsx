@@ -32,7 +32,7 @@ const FormLogin = () => {
       <div className="mb-2">
         <label
           htmlFor="username"
-          className="block text-sm font-medium text-secondary mb-1.5 select-none"
+          className="block text-sm text-secondary font-medium mb-1.5 select-none"
         >
           Username
         </label>
@@ -53,7 +53,7 @@ const FormLogin = () => {
             required
             placeholder="Enter Your Username"
             className={[
-              "w-full bg-vault text-primary placeholder:text-secondary/40",
+              "w-full bg-vault text-primary placeholder:text-secondary/55",
               "border rounded-lg border-white/80 light:border-black/45 py-2.5 pl-3 pr-4 text-sm",
               "outline-none transition-all duration-150",
               "focus:border-accent focus:ring-2 focus:ring-accent/20",
@@ -66,7 +66,7 @@ const FormLogin = () => {
       <div className="mb-2">
         <label
           htmlFor="password"
-          className="block text-sm font-medium text-secondary mb-1.5 select-none"
+          className="block text-sm text-secondary font-medium mb-1.5 select-none"
         >
           Password
         </label>
@@ -89,7 +89,7 @@ const FormLogin = () => {
             required
             placeholder="Enter Your Password"
             className={[
-              "w-full bg-vault text-primary placeholder:text-secondary/40",
+              "w-full bg-vault text-primary placeholder:text-secondary/55",
               "border rounded-lg border-white/80 light:border-black/45 py-2.5 pl-3 pr-4 text-sm",
               "outline-none transition-all duration-150",
               "focus:border-accent focus:ring-2 focus:ring-accent/20",

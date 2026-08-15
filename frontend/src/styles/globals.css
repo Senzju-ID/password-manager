@@ -13,8 +13,8 @@
 @theme inline {
 	--color-vault: var(--vault-bg);
 	--color-surface: var(--vault-surface);
-	--text-primary: var(--vault-text-primary);
-	--text-secondary: var(--vault-text-secondary);
+	--text-color-primary: var(--vault-text-primary);
+	--text-color-secondary: var(--vault-text-secondary);
 	--color-accent: var(--vault-accent);
 }
 
