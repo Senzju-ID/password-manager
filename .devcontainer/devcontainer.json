@@ -1,16 +1,13 @@
 {
-  "name": "PHP 8.4 & Node.js LTS Full Stack",
+  "name": "Laravel 13 & Next.js 16 Full Stack",
   "image": "mcr.microsoft.com/devcontainers/php:1-8.4",
   "features": {
     "ghcr.io/devcontainers/features/node:2.1.0": {
-      "version": "lts"
+      "version": "22" 
     },
     "ghcr.io/devcontainers/features/git:1": {
       "version": "latest",
       "ppa": "false"
-    },
-    "ghcr.io/devcontainers/features/git-lfs:1": {
-      "version": "latest"
     },
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
@@ -18,39 +15,27 @@
     "vscode": {
       "extensions": [
         "bmewburn.vscode-intelephense-client",
-        "ikappas.composer",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        
+        "onecentlin.laravel-blade",
+        "onecentlin.laravel-extra-intellisense",
         "bradlc.vscode-tailwindcss",
-        
-        "eamodio.gitlens",
-        
-        "ms-azuretools.vscode-docker",
-        
-        "formulahendry.auto-rename-tag",
-        "formulahendry.auto-close-tag",
-        
-        "mhutchie.git-graph"
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
       ],
       "settings": {
         "php.validate.executablePath": "/usr/local/bin/php",
-        "php.suggest.basic": false,
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "tailwindCSS.emmetCompletions": true,
-        "tailwindCSS.includeLanguages": {
-        "typescriptreact": "html",
-        "javascriptreact": "html",
-        "html": "html"
+        "files.associations": {
+          "*.css": "tailwindcss",
+          "*.blade.php": "blade"
         }
       }
     }
   },
-  "forwardPorts": [8000, 8080, 3000],
-  "postCreateCommand": "sudo chown -R vscode:vscode /workspaces && git lfs install && corepack enable && corepack prepare pnpm@latest --activate",
+  "forwardPorts": [8000, 3000],
+  "postCreateCommand": "sudo chown -R vscode:vscode /workspaces && corepack enable && corepack prepare pnpm@latest --activate",
   "remoteUser": "vscode",
   "mounts": [
-    "source=pnpm-store,target=/home/vscode/.local/share/pnpm,type=volume"
+    "source=pnpm-store,target=/home/vscode/.local/share/pnpm,type=volume",
+    "source=composer-cache,target=/home/vscode/.composer/cache,type=volume"
   ]
 }   
