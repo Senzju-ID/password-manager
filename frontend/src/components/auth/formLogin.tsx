@@ -1,8 +1,13 @@
 "use client";
 import FormUiAuth from "@/components/ui/formUiAuth";
 import API from "@/lib/axios";
+import ButtonToggle from "../ui/buttonToggle";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 const FormLogin = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -10,12 +15,14 @@ const FormLogin = () => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await API.post("/auth/login", data);
-      console.log("Login successful:", response.data);
-    } catch (error) {
-      console.error("Error occurred while logging in:", error);
+      await API.get("/auth/sanctum/csrf-cookie");
+      const res = await API.post("/auth/ping", data);
+      console.log("respon :", res.data);
+    } catch (err) {
+      console.error("Error occurred while logging in:", err);
     }
   };
+
   return (
     <FormUiAuth
       onSubmit={handleSubmit}
@@ -34,6 +41,7 @@ const FormLogin = () => {
             className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
             aria-hidden="true"
           ></span>
+
           <input
             id="username"
             name="username"
@@ -67,10 +75,16 @@ const FormLogin = () => {
             className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
             aria-hidden="true"
           ></span>
+          <ButtonToggle
+            className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
+            onToggle={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+          </ButtonToggle>
           <input
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             required
             placeholder="Enter Your Password"
@@ -95,7 +109,8 @@ const FormLogin = () => {
       </div>
       {/* Dont Have Account Field */}
       <div className="mt-4 text-center select-none">
-        <p className="text-sm text-secondary">{"Don't have an account?"+" "}
+        <p className="text-sm text-secondary">
+          {"Don't have an account?" + " "}
           <a href="/auth/register" className="text-accent hover:underline">
             Register here
           </a>

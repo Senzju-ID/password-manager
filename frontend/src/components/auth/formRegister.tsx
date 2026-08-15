@@ -1,7 +1,13 @@
 "use client";
 import FormUiAuth from "@/components/ui/formUiAuth";
+import { useState } from "react";
+import ButtonToggle from "../ui/buttonToggle";
+import { Eye, EyeOff } from "lucide-react";
 
 const FormRegister = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
@@ -83,10 +89,16 @@ const FormRegister = () => {
             className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
             aria-hidden="true"
           ></span>
+          <ButtonToggle
+            className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
+            onToggle={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+          </ButtonToggle>
           <input
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             required
             placeholder="Enter Your Password"
@@ -113,10 +125,16 @@ const FormRegister = () => {
               className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
               aria-hidden="true"
             ></span>
+            <ButtonToggle
+              className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
+              onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+            </ButtonToggle>
             <input
               id="confirmPassword"
               name="confirmPassword"
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               autoComplete="current-password"
               required
               placeholder="Confirm Your Password"
