@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant light (&:where(.light *));
+
 @theme {
 	--vault-bg: #0d0e12;
 	--vault-surface: #161a23;
