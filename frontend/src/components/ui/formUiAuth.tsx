@@ -10,7 +10,7 @@ interface AuthFromProps {
 const FormUiAuth = ({ children, onSubmit, PText }: AuthFromProps) => {
   return (
     <div className="min-h-screen bg-vault text-primary flex items-center justify-center p-4 relative overflow-hidden">
-        <ButtonThemeSwitch className="absolute top-4 right-4 border border-white/6 light:border-black/70" />
+      <ButtonThemeSwitch className="absolute top-4 right-4 border border-white/6 light:border-black/70" />
       <div className="w-full max-w-sm z-10">
         <p>{PText}</p>
         <form

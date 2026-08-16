@@ -17,7 +17,7 @@ const FormRegister = () => {
       <div className="mb-2">
         <label
           htmlFor="username"
-          className="block text-sm font-medium text-secondary mb-1.5 select-none"
+          className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
         >
           Username
         </label>
@@ -50,7 +50,7 @@ const FormRegister = () => {
         <div className="mb-2">
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-secondary mb-1.5 select-none"
+            className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
           >
             Email
           </label>
@@ -80,7 +80,7 @@ const FormRegister = () => {
       <div className="mb-2">
         <label
           htmlFor="password"
-          className="block text-sm font-medium text-secondary mb-1.5 select-none"
+          className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
         >
           Password
         </label>
@@ -92,6 +92,7 @@ const FormRegister = () => {
           <ButtonToggle
             className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
             onToggle={() => setShowPassword(!showPassword)}
+            type="button"
           >
             {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
           </ButtonToggle>
@@ -116,7 +117,7 @@ const FormRegister = () => {
         <div className="mb-2">
           <label
             htmlFor="confirmPassword"
-            className="block text-sm font-medium text-secondary mb-1.5 select-none"
+            className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
           >
             Confirm Password
           </label>
@@ -128,6 +129,7 @@ const FormRegister = () => {
             <ButtonToggle
               className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
               onToggle={() => setShowConfirmPassword(!showConfirmPassword)}
+              type="button"
             >
               {showConfirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
             </ButtonToggle>
@@ -150,16 +152,16 @@ const FormRegister = () => {
         </div>
         {/* Submit Button Field */}
         <div className="mt-4">
-          <button
+          <ButtonToggle
             type="submit"
             className="w-full bg-accent text-primary font-medium py-2.5 rounded-lg hover:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150"
           >
             Register
-          </button>
+          </ButtonToggle>
         </div>
         {/* Already Have Account Field */}
         <div className="mt-4 text-center select-none">
-          <p className="text-sm text-secondary">
+          <p className="text-sm text-primary/85">
             Already have an account?{" "}
             <a href="/auth/login" className="text-accent hover:underline">
               Login here

@@ -32,7 +32,7 @@ const FormLogin = () => {
       <div className="mb-2">
         <label
           htmlFor="username"
-          className="block text-sm text-secondary font-medium mb-1.5 select-none"
+          className="block text-sm text-primary/85 font-medium mb-1.5 select-none"
         >
           Username
         </label>
@@ -66,7 +66,7 @@ const FormLogin = () => {
       <div className="mb-2">
         <label
           htmlFor="password"
-          className="block text-sm text-secondary font-medium mb-1.5 select-none"
+          className="block text-sm text-primary/85 font-medium mb-1.5 select-none"
         >
           Password
         </label>
@@ -78,6 +78,7 @@ const FormLogin = () => {
           <ButtonToggle
             className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
             onToggle={() => setShowPassword(!showPassword)}
+            type="button"
           >
             {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
           </ButtonToggle>
@@ -100,16 +101,16 @@ const FormLogin = () => {
       </div>
       {/* Submit Button Field */}
       <div className="mt-4">
-        <button
+        <ButtonToggle
           type="submit"
           className="w-full bg-accent text-primary font-medium py-2.5 rounded-lg hover:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150"
         >
           Login
-        </button>
+        </ButtonToggle>
       </div>
       {/* Dont Have Account Field */}
       <div className="mt-4 text-center select-none">
-        <p className="text-sm text-secondary">
+        <p className="text-sm text-primary/85">
           {"Don't have an account?" + " "}
           <a href="/auth/register" className="text-accent hover:underline">
             Register here

@@ -5,15 +5,16 @@ interface ButtonToggleProps {
   children?: React.ReactNode;
   className?: string;
   onToggle?: () => void;
+  type?: "button" | "submit" | "reset";
 }
 
-const ButtonToggle = ({ className, onToggle, children }: ButtonToggleProps) => {
+const ButtonToggle = ({ className, onToggle, children, type }: ButtonToggleProps) => {
 
   return (
     <button
-      type="button"
+      type={type}
       onClick={onToggle}
-      className={className}
+      className={`cursor-pointer ${className}`}
     >
       {children}
     </button>
