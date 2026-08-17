@@ -11,7 +11,7 @@
 }
 
 @theme inline {
-	--color-vault: var(--vault-bg);
+	--color-primary: var(--vault-bg);
 	--color-surface: var(--vault-surface);
 	--text-color-primary: var(--vault-text-primary);
 	--text-color-secondary: var(--vault-text-secondary);

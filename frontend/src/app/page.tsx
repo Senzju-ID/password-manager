@@ -1,14 +1,9 @@
-import Header from '@/components/layout/header';
-import { redirect } from 'next/navigation';
-
+import { Header } from '@/components';
 export default function Page() {
-    redirect('/auth/login');
+    
     return (
-        <div className="h-screen w-full bg-blue-100">
+        <div className="h-screen w-full bg-primary">
             <Header />
-            <div className="flex h-10 bg-red-400  justify-center items-center">
-                halllooo
-            </div>
         </div>
     );
 }

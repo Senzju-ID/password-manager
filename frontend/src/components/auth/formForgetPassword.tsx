@@ -32,6 +32,7 @@ const FormForgetPassword = () => {
         <div className="mt-4">
           <ButtonToggle
             type="submit"
+            className="w-full bg-accent text-primary font-medium py-2.5 rounded-lg hover:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150"
           >
             Send Reset Link
           </ButtonToggle>
