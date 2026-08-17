@@ -1,7 +1,6 @@
 "use client";
-import FormUiAuth from "@/components/ui/formUiAuth";
+import { ButtonToggle, FormUiAuth, Input  } from "@/components";
 import API from "@/lib/axios";
-import ButtonToggle from "../ui/buttonToggle";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
@@ -42,7 +41,7 @@ const FormLogin = () => {
             aria-hidden="true"
           ></span>
 
-          <input
+          <Input
             id="username"
             name="username"
             type="text"
@@ -52,13 +51,6 @@ const FormLogin = () => {
             spellCheck={false}
             required
             placeholder="Enter Your Username"
-            className={[
-              "w-full bg-vault text-primary placeholder:text-secondary/55",
-              "border rounded-lg border-white/80 light:border-black/45 py-2.5 pl-3 pr-4 text-sm",
-              "outline-none transition-all duration-150",
-              "focus:border-accent focus:ring-2 focus:ring-accent/20",
-              "disabled:opacity-50 disabled:cursor-not-allowed",
-            ].join(" ")}
           />
         </div>
       </div>
@@ -82,20 +74,13 @@ const FormLogin = () => {
           >
             {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
           </ButtonToggle>
-          <input
+          <Input
             id="password"
             name="password"
             type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             required
             placeholder="Enter Your Password"
-            className={[
-              "w-full bg-vault text-primary placeholder:text-secondary/55",
-              "border rounded-lg border-white/80 light:border-black/45 py-2.5 pl-3 pr-4 text-sm",
-              "outline-none transition-all duration-150",
-              "focus:border-accent focus:ring-2 focus:ring-accent/20",
-              "disabled:opacity-50 disabled:cursor-not-allowed",
-            ].join(" ")}
           />
         </div>
       </div>
@@ -103,7 +88,6 @@ const FormLogin = () => {
       <div className="mt-4">
         <ButtonToggle
           type="submit"
-          className="w-full bg-accent text-primary font-medium py-2.5 rounded-lg hover:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all duration-150"
         >
           Login
         </ButtonToggle>
