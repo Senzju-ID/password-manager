@@ -1,9 +1,9 @@
-import FormLogin from "@/components/auth/formLogin"
+import FormLogin from "@/components/auth/FormLogin";
 
 export default function LoginPage() {
-    return (
-        <div className="">
-            <FormLogin/>
-        </div>
-    );
+  return (
+    <>
+      <FormLogin />
+    </>
+  );
 }

@@ -1,9 +1,9 @@
-import FormRegister from "@/components/auth/formRegister";
+import FormRegister from "@/components/auth/FormRegister";
 
 export default function RegisterPage() {
-    return (
-        <div className="bg-white">
-            <FormRegister />
-        </div>
-    );
+  return (
+    <>
+      <FormRegister />
+    </>
+  );
 }
