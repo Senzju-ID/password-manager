@@ -1,12 +1,13 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'login', 'logout', 'auth/login', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'auth/login', 'auth/register', 'auth/logout', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'https://symmetrical-fishstick-9694rp9jrqgrfp6pw-3000.app.github.dev'
+        'http://localhost:3000',
+        'http://127.0.0.1:3000'
     ],
 
     'allowed_origins_patterns' => [],

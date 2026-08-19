@@ -1,5 +1,5 @@
 "use client";
-import { ButtonToggle, FormUiAuth, Input  } from "@/components";
+import { ButtonToggle, FormUiAuth, Input } from "@/components";
 import API from "@/lib/axios";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
@@ -14,8 +14,8 @@ const FormLogin = () => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      await API.get("/auth/sanctum/csrf-cookie");
-      const res = await API.post("/auth/ping", data);
+      await API.get("/sanctum/csrf-cookie");
+      const res = await API.post("/auth/login", data);
       console.log("respon :", res.data);
     } catch (err) {
       console.error("Error occurred while logging in:", err);

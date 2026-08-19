@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
-interface ButtonThemeSwitchProps {
+interface ThemeSwitchProps {
   className?: string;
+  sizeIcon: number;
 }
 
 function getInitialTheme(): boolean {
@@ -12,7 +13,7 @@ function getInitialTheme(): boolean {
   return savedTheme === "light";
 }
 
-const ButtonThemeSwitch = ({ className }: ButtonThemeSwitchProps) => {
+const ThemeSwitch = ({ className, sizeIcon }: ThemeSwitchProps) => {
   const [mounted, setMounted] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -54,7 +55,7 @@ const ButtonThemeSwitch = ({ className }: ButtonThemeSwitchProps) => {
       type="button"
       onClick={toggleTheme}
       disabled={isLoading}
-      className={`group rounded-4xl transition-all duration-300 ${
+      className={`group border border-white/22 light:border-black/70 rounded-4xl transition-all duration-300 ${
         isLoading
           ? "opacity-50 cursor-not-allowed"
           : "cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 scale-100"
@@ -63,12 +64,12 @@ const ButtonThemeSwitch = ({ className }: ButtonThemeSwitchProps) => {
     >
       {isLight ? (
         <Moon
-          size={20}
+          size={sizeIcon}
           className={`text-center text-black group-hover:text-white m-2 duration-1000 transition-transform `}
         />
       ) : (
         <Sun
-          size={20}
+          size={sizeIcon}
           className={`text-center m-2 duration-1000 transition-transform`}
         />
       )}
@@ -76,4 +77,4 @@ const ButtonThemeSwitch = ({ className }: ButtonThemeSwitchProps) => {
   );
 };
 
-export default ButtonThemeSwitch;
+export default ThemeSwitch;

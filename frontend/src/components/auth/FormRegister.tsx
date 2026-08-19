@@ -2,13 +2,28 @@
 import { ButtonToggle, FormUiAuth, Input  } from "@/components";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { registerUser, RegisterData } from "@/lib/auth";
 
 const FormRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries()) as RegisterData;
+    
+    try {
+      await registerUser(data);
+      alert("registrasi berhasil")
+    } catch (err) {
+      if (err instanceof Error && err.message === "Request failed with status code 422") {
+        alert("registrasi gagal, pastikan username dan email belum digunakan");
+      } else {
+        console.error("Error occurred while registering:", err);
+        alert("registrasi gagal, terjadi kesalahan pada server");
+      }
+    }
   };
   return (
     <FormUiAuth onSubmit={handleSubmit} PText="Create an account to get started.">
@@ -113,7 +128,7 @@ const FormRegister = () => {
             </ButtonToggle>
             <Input
               id="confirmPassword"
-              name="confirmPassword"
+              name="password_confirmation"
               type={showConfirmPassword ? "text" : "password"}
               autoComplete="current-password"
               required

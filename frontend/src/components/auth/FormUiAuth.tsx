@@ -9,8 +9,8 @@ interface AuthFormProps {
 
 const FormUiAuth = ({ children, onSubmit, PText }: AuthFormProps) => {
   return (
-    <div className="flex-1 flex items-center justify-center p-4 relative overflow-hidden">
-      <ButtonThemeSwitch className="absolute top-4 right-4 border border-white/6 light:border-black/70" />
+    <main className="flex-1 flex items-center justify-center p-4 relative overflow-hidden">
+      <ButtonThemeSwitch className="absolute top-4 right-4" sizeIcon={20} />
       <div className="w-full max-w-sm z-10">
         <p>{PText}</p>
         <form
@@ -22,7 +22,7 @@ const FormUiAuth = ({ children, onSubmit, PText }: AuthFormProps) => {
           {children}
         </form>
       </div>
-    </div>
+    </main>
   );
 };
 
