@@ -1,24 +1,26 @@
 "use client";
 import { ButtonToggle, FormUiAuth, Input } from "@/components";
-import API from "@/lib/axios";
+import { LoginUser, LoginUserProps } from "@/lib/auth";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const FormLogin = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+    const data = Object.fromEntries(formData.entries()) as unknown as LoginUserProps;
 
     try {
-      await API.get("/sanctum/csrf-cookie");
-      const res = await API.post("/auth/login", data);
-      console.log("respon :", res.data);
+      await LoginUser(data)
+      alert("berhasil login")
+      router.push("/dash");
     } catch (err) {
-      console.error("Error occurred while logging in:", err);
+      alert("Error occurred while logging in:"+ err);
     }
   };
 
@@ -27,13 +29,13 @@ const FormLogin = () => {
       onSubmit={handleSubmit}
       PText="Welcome Back! Please login to your account."
     >
-      {/* Username Input Field */}
+      {/* Email Input Field */}
       <div className="mb-2">
         <label
-          htmlFor="username"
+          htmlFor="email"
           className="block text-sm text-primary/85 font-medium mb-1.5 select-none"
         >
-          Username
+          Email
         </label>
         <div className="relative">
           <span
@@ -42,15 +44,15 @@ const FormLogin = () => {
           ></span>
 
           <Input
-            id="username"
-            name="username"
+            id="email"
+            name="email"
             type="text"
-            autoComplete="username"
+            autoComplete="email"
             autoCapitalize="none"
             autoCorrect="off"
             spellCheck={false}
             required
-            placeholder="Enter Your Username"
+            placeholder="example@gmail.com"
           />
         </div>
       </div>

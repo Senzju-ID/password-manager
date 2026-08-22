@@ -2,22 +2,30 @@
 import { ButtonToggle, FormUiAuth, Input  } from "@/components";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { registerUser, RegisterData } from "@/lib/auth";
+import { RegisterUser, RegisterUserProps } from "@/lib/auth";
+import { useRouter } from "next/navigation";
 
 const FormRegister = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries()) as RegisterData;
+    const data = Object.fromEntries(formData.entries()) as unknown as RegisterUserProps;
     
     try {
-      await registerUser(data);
-      alert("registrasi berhasil")
+      await RegisterUser(data);
+      alert("registrasi berhasil");
+      router.push("/auth/login");
     } catch (err) {
-      if (err instanceof Error && err.message === "Request failed with status code 422") {
+      if (
+        err instanceof Error &&
+        (err.message.includes("302") ||
+          err.message.includes("400") ||
+          err.message.includes("409"))
+      ) {
         alert("registrasi gagal, pastikan username dan email belum digunakan");
       } else {
         console.error("Error occurred while registering:", err);

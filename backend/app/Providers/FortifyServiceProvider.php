@@ -52,5 +52,17 @@ class FortifyServiceProvider extends ServiceProvider
                 ($credentialId ?: $request->session()->getId()).'|'.$request->ip()
             );
         });
+
+        $this->app->singleton(
+            \Laravel\Fortify\Contracts\LoginResponse::class,
+            function () {
+                 return  new class implements \Laravel\Fortify\Contracts\LoginResponse {
+                    public function toResponse($request)
+                        {
+                         return response()->json(['message' => 'Login Success'], 200);
+                         }
+               };
+            }
+        );
     }
 }
