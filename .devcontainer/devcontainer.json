@@ -22,8 +22,7 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "dsznajder.es7-react-js-snippets",
-        "formulahendry.auto-rename-tag",
-        "Continue.continue"
+        "formulahendry.auto-rename-tag"
       ],
       "settings": {
         "workbench.secondarySideBar.defaultVisibility": "hidden",
