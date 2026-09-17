@@ -1,5 +1,4 @@
 import { ThemeSwitch } from "@/components";
-import { LogoutUser } from "@/lib/auth";
 import LogoutButton from "./logoutButton";
 import Link from "next/link";
 

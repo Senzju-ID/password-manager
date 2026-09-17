@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { ButtonToggle } from "@/components";
-import { LogoutUser } from "@/lib/auth";
+import { LogoutUser } from "@/features/auth/services/auth";
 
 const logoutButton = () => {
-  return <ButtonToggle onToggle={LogoutUser}>Logout</ButtonToggle>;
-}
+    return <ButtonToggle onToggle={LogoutUser}>Logout</ButtonToggle>;
+};
 
-export default logoutButton
+export default logoutButton;
