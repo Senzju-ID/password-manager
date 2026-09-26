@@ -1,5 +1,5 @@
 "use client";
-import { ButtonToggle } from "@/components";
+import ButtonToggle from "@/components/ui/ButtonToggle";
 import { LogoutUser } from "@/features/auth/services/auth";
 
 const logoutButton = () => {

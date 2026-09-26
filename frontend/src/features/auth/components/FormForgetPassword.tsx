@@ -1,37 +1,22 @@
 "use client";
-
-import { ButtonToggle, Input } from "@/components";
-import FormUiAuth from "./FormUiAuth";
+import { ButtonToggle } from "@/components";
+import FormField from "./ui/FormField";
+import FormAuth from "./FormAuth";
+import Link from "next/link";
 
 const FormForgetPassword = () => {
     return (
-        <FormUiAuth
-            onSubmit={e => e.preventDefault()}
-            PText="Enter Your Email and we will send you a link to reset your password."
-        >
+        <FormAuth>
             {/* Email Input Field */}
-            <div className="mb-2">
-                <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
-                >
-                    Email
-                </label>
-                <div className="relative">
-                    <span
-                        className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
-                        aria-hidden="true"
-                    ></span>
-                    <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        required
-                        placeholder="Enter Your Email"
-                    />
-                </div>
-            </div>
+            <FormField
+                id="email"
+                name="email"
+                label="Email"
+                type="email"
+                placeholder="Enter your email"
+                autoComplete="email"
+                required
+            />
             {/* Submit Button Field */}
             <div className="mt-4">
                 <ButtonToggle
@@ -41,7 +26,16 @@ const FormForgetPassword = () => {
                     Send Reset Link
                 </ButtonToggle>
             </div>
-        </FormUiAuth>
+
+            <div className="mt-4 text-center">
+                <Link
+                    href="/auth/login"
+                    className="text-sm text-accent hover:underline"
+                >
+                    Back to Login
+                </Link>
+            </div>
+        </FormAuth>
     );
 };
 

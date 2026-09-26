@@ -1,15 +1,14 @@
 "use client";
-import { ButtonToggle, Input } from "@/components";
-import FormUiAuth from "./FormUiAuth";
-import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { ButtonToggle } from "@/components";
+import FormAuth from "./FormAuth";
+import FormField from "./ui/FormField";
+
 import { RegisterUser, RegisterUserProps } from "../services/auth";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const FormRegister = () => {
     const router = useRouter();
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -21,7 +20,7 @@ const FormRegister = () => {
         try {
             await RegisterUser(data);
             alert("registrasi berhasil");
-            router.push("/auth/login");
+            router.push("/dashboard");
         } catch (err) {
             if (
                 err instanceof Error &&
@@ -39,129 +38,49 @@ const FormRegister = () => {
         }
     };
     return (
-        <FormUiAuth
+        <FormAuth
             onSubmit={handleSubmit}
             PText="Create an account to get started."
         >
             {/* Username Input Field */}
-            <div className="mb-2">
-                <label
-                    htmlFor="username"
-                    className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
-                >
-                    Username
-                </label>
-                <div className="relative">
-                    <span
-                        className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
-                        aria-hidden="true"
-                    ></span>
-                    <Input
-                        id="username"
-                        name="username"
-                        type="text"
-                        autoComplete="username"
-                        autoCapitalize="none"
-                        autoCorrect="off"
-                        spellCheck={false}
-                        required
-                        placeholder="Enter Your Username"
-                    />
-                </div>
-            </div>
+            <FormField
+                id="username"
+                name="username"
+                label="Username"
+                type="text"
+                placeholder="Enter your username"
+                required
+            />
             {/* Email Input Field */}
-            <div className="mb-2">
-                <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
-                >
-                    Email
-                </label>
-                <div className="relative">
-                    <span
-                        className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
-                        aria-hidden="true"
-                    ></span>
-                    <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        autoComplete="email"
-                        required
-                        placeholder="Enter Your Email"
-                    />
-                </div>
-            </div>
+            <FormField
+                id="email"
+                name="email"
+                label="Email"
+                type="email"
+                placeholder="Enter your email"
+                autoComplete="email"
+                required
+            />
             {/* Password Input Field */}
-            <div className="mb-2">
-                <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
-                >
-                    Password
-                </label>
-                <div className="relative">
-                    <span
-                        className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
-                        aria-hidden="true"
-                    ></span>
-                    <ButtonToggle
-                        className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
-                        onToggle={() => setShowPassword(!showPassword)}
-                        type="button"
-                    >
-                        {showPassword ? (
-                            <Eye size={20} />
-                        ) : (
-                            <EyeOff size={20} />
-                        )}
-                    </ButtonToggle>
-                    <Input
-                        id="password"
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        autoComplete="current-password"
-                        required
-                        placeholder="Enter Your Password"
-                    />
-                </div>
-            </div>
+            <FormField
+                id="password"
+                name="password"
+                label="Password"
+                type="password"
+                placeholder="Enter your password"
+                autoComplete="new-password"
+                required
+            />
             {/* Confirm Password Input Field */}
-            <div className="mb-2">
-                <label
-                    htmlFor="confirmPassword"
-                    className="block text-sm font-medium text-primary/85 mb-1.5 select-none"
-                >
-                    Confirm Password
-                </label>
-                <div className="relative">
-                    <span
-                        className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
-                        aria-hidden="true"
-                    ></span>
-                    <ButtonToggle
-                        className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
-                        onToggle={() =>
-                            setShowConfirmPassword(!showConfirmPassword)
-                        }
-                        type="button"
-                    >
-                        {showConfirmPassword ? (
-                            <Eye size={20} />
-                        ) : (
-                            <EyeOff size={20} />
-                        )}
-                    </ButtonToggle>
-                    <Input
-                        id="confirmPassword"
-                        name="password_confirmation"
-                        type={showConfirmPassword ? "text" : "password"}
-                        autoComplete="current-password"
-                        required
-                        placeholder="Confirm Your Password"
-                    />
-                </div>
-            </div>
+            <FormField
+                id="password_confirmation"
+                name="password_confirmation"
+                label="Confirm Password"
+                type="password"
+                placeholder="Confirm your password"
+                autoComplete="new-password"
+                required
+            />
             {/* Submit Button Field */}
             <div className="mt-4">
                 <ButtonToggle
@@ -175,15 +94,15 @@ const FormRegister = () => {
             <div className="mt-4 text-center select-none">
                 <p className="text-sm text-primary/85">
                     Already have an account?{" "}
-                    <a
+                    <Link
                         href="/auth/login"
                         className="text-accent hover:underline"
                     >
                         Login here
-                    </a>
+                    </Link>
                 </p>
             </div>
-        </FormUiAuth>
+        </FormAuth>
     );
 };
 

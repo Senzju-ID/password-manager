@@ -19,17 +19,17 @@
 }
 
 .light {
-	--vault-bg: #f0f2f5;
+	--vault-bg: #f2f2f0;
 	--vault-surface: #ffffff;
-	--vault-text-primary: #0d0e12;
-	--vault-text-secondary: #64748b;
-	--vault-accent: #059669;
+	--vault-text-primary: #1e2022;
+	--vault-text-secondary: #575c66;
+	--vault-accent: #059669;      
 }
 
 @layer base {
 	body {
-		background-color: var(--color-vault);
-		color: var(--text-primary);
+		background-color: var(--color-primary);
+		color: var(--text-color-primary);
 		font-family: Arial, Helvetica, sans-serif;
 		transition: background-color 0.4s ease, color 0.4s ease;
 	}

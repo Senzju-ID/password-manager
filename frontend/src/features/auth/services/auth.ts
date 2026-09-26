@@ -23,6 +23,5 @@ export const LoginUser = async (data: LoginUserProps) => {
 };
 
 export const LogoutUser = async () => {
-    await getCsrfCookie();
     return API.post("/auth/logout");
 };

@@ -1,27 +1,27 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export default function proxy(request: NextRequest) {
-    const hasXsrf = request.cookies.has("XSRF-TOKEN");
-    const hasSession = request.cookies.has("laravel_session");
+    const hasSession = request.cookies.has("laravel-session");
 
-    const isAuthenticated = hasXsrf || hasSession
-    
-    const {pathname} = request.nextUrl;
-    const isDashPage = pathname.startsWith("/dash");
+    const { pathname } = request.nextUrl;
+    const isDashPage = pathname.startsWith("/dashboard");
     const isAuthPage = pathname.startsWith("/auth");
 
-    if (isDashPage && !isAuthenticated ) {
-        return NextResponse.redirect(new URL("/auth/login", request.url))
+    if (pathname === "/auth") {
+        return NextResponse.redirect(new URL("/auth/login", request.url));
+    }
+    if (isDashPage && !hasSession) {
+        return NextResponse.redirect(new URL("/auth/login", request.url));
     }
 
-    if (isAuthPage && isAuthenticated ) {
-        return NextResponse.redirect(new URL("/dash", request.url))
+    if (isAuthPage && hasSession) {
+        return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 
-    return NextResponse.next()
+    return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/dash/:path*", "/auth/:path*"],
+    matcher: ["/dashboard/:path*", "/auth/:path*"]
 };

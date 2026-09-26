@@ -1,15 +1,14 @@
 "use client";
-import { ButtonToggle, Input } from "@/components";
-import FormUiAuth from "./FormUiAuth";
+import { ButtonToggle } from "@/components";
+import FormAuth from "./FormAuth";
+import FormField from "./ui/FormField";
+
 import { LoginUser, LoginUserProps } from "../services/auth";
-import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const FormLogin = () => {
     const router = useRouter();
-    const [showPassword, setShowPassword] = useState(false);
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -21,78 +20,37 @@ const FormLogin = () => {
         try {
             await LoginUser(data);
             alert("berhasil login");
-            router.push("/dash");
+            router.push("/dashboard");
         } catch (err) {
             alert("Error occurred while logging in:" + err);
         }
     };
 
     return (
-        <FormUiAuth
+        <FormAuth
             onSubmit={handleSubmit}
             PText="Welcome Back! Please login to your account."
         >
             {/* Email Input Field */}
-            <div className="mb-2">
-                <label
-                    htmlFor="email"
-                    className="block text-sm text-primary/85 font-medium mb-1.5 select-none"
-                >
-                    Email
-                </label>
-                <div className="relative">
-                    <span
-                        className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
-                        aria-hidden="true"
-                    ></span>
-
-                    <Input
-                        id="email"
-                        name="email"
-                        type="text"
-                        autoComplete="email"
-                        autoCapitalize="none"
-                        autoCorrect="off"
-                        spellCheck={false}
-                        required
-                        placeholder="example@gmail.com"
-                    />
-                </div>
-            </div>
+            <FormField
+                id="email"
+                name="email"
+                label="Email"
+                type="email"
+                placeholder="Enter your email"
+                autoComplete="email"
+                required
+            />
             {/* Password Input Field */}
-            <div className="mb-2">
-                <label
-                    htmlFor="password"
-                    className="block text-sm text-primary/85 font-medium mb-1.5 select-none"
-                >
-                    Password
-                </label>
-                <div className="relative">
-                    <span
-                        className="absolute inset-y-0 left-3 flex items-center pointer-events-none"
-                        aria-hidden="true"
-                    ></span>
-                    <ButtonToggle
-                        className="absolute cursor-pointer text-gray-500 hover:text-gray-700 right-3 top-3 "
-                        onToggle={() => setShowPassword(!showPassword)}
-                        type="button"
-                    >
-                        {showPassword ? (
-                            <Eye size={20} />
-                        ) : (
-                            <EyeOff size={20} />
-                        )}
-                    </ButtonToggle>
-                    <Input
-                        id="password"
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        autoComplete="current-password"
-                        required
-                        placeholder="Enter Your Password"
-                    />
-                </div>
-            </div>
+            <FormField
+                id="password"
+                name="password"
+                label="Password"
+                type="password"
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                required
+            />
             {/* Submit Button Field */}
             <div className="mt-4">
                 <ButtonToggle
@@ -106,24 +64,24 @@ const FormLogin = () => {
             <div className="mt-4 text-center select-none">
                 <p className="text-sm text-primary/85">
                     {"Don't have an account?" + " "}
-                    <a
+                    <Link
                         href="/auth/register"
                         className="text-accent hover:underline"
                     >
                         Register here
-                    </a>
+                    </Link>
                 </p>
             </div>
             {/* Forgot Password Field */}
             <div className="select-none text-center">
-                <a
+                <Link
                     href="/auth/forgot-password"
                     className="text-sm text-accent hover:underline"
                 >
                     Forgot your password?
-                </a>
+                </Link>
             </div>
-        </FormUiAuth>
+        </FormAuth>
     );
 };
 

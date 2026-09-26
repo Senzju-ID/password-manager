@@ -7,7 +7,7 @@ interface AuthFormProps {
     PText: string;
 }
 
-const FormUiAuth = ({ children, onSubmit, PText }: AuthFormProps) => {
+const FormAuth = ({ children, onSubmit, PText }: AuthFormProps) => {
     return (
         <main className="flex-1 flex items-center justify-center p-4 relative overflow-hidden">
             <ThemeSwitch className="absolute top-4 right-4" sizeIcon={20} />
@@ -26,4 +26,4 @@ const FormUiAuth = ({ children, onSubmit, PText }: AuthFormProps) => {
     );
 };
 
-export default FormUiAuth;
+export default FormAuth;
