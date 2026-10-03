@@ -1,25 +1,26 @@
-interface ButtonToggleProps {
-    children?: React.ReactNode;
-    className?: string;
-    onToggle?: () => void;
-    type?: "button" | "submit" | "reset";
+import type { ButtonHTMLAttributes } from "react";
+
+interface ButtonToggleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  onToggle?: () => void;
 }
 
 const ButtonToggle = ({
-    className,
-    onToggle,
-    children,
-    type
+  className,
+  onToggle,
+  children,
+  type = "button",
+  ...props
 }: ButtonToggleProps) => {
-    return (
-        <button
-            type={type}
-            onClick={onToggle}
-            className={`cursor-pointer ${className} `}
-        >
-            {children}
-        </button>
-    );
+  return (
+    <button
+      type={type}
+      onClick={onToggle}
+      className={`cursor-pointer ${className} `}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 };
 
 export default ButtonToggle;

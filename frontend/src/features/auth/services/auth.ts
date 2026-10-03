@@ -1,4 +1,9 @@
-import { API, getCsrfCookie } from "@/lib/axios";
+import ApiClient from "@/lib/axios";
+
+export const getCsrfCookie = async (): Promise<void> => {
+  await ApiClient.get("/sanctum/csrf-cookie");
+};
+
 
 export interface RegisterUserProps {
     username: string;
@@ -9,7 +14,7 @@ export interface RegisterUserProps {
 
 export const RegisterUser = async (data: RegisterUserProps) => {
     await getCsrfCookie();
-    return API.post("/auth/register", data);
+    return ApiClient.post("/auth/register", data);
 };
 
 export interface LoginUserProps {
@@ -19,9 +24,21 @@ export interface LoginUserProps {
 
 export const LoginUser = async (data: LoginUserProps) => {
     await getCsrfCookie();
-    return API.post("/auth/login", data);
+    return ApiClient.post("/auth/login", data);
 };
 
 export const LogoutUser = async () => {
-    return API.post("/auth/logout");
+    return ApiClient.post("/auth/logout");
 };
+
+export interface ResetPasswordProps {
+    token: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+};
+
+export const ResetPassword = async (data: ResetPasswordProps) => {
+    await getCsrfCookie();
+    return ApiClient.post("/auth/reset-password", data)
+}

@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
-export const API: AxiosInstance = axios.create({
+const ApiClient: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
   withXSRFToken: true,
@@ -11,6 +11,4 @@ export const API: AxiosInstance = axios.create({
   },
 });
 
-export const getCsrfCookie = async (): Promise<void> => {
-  await API.get("/sanctum/csrf-cookie");
-};
+export default ApiClient

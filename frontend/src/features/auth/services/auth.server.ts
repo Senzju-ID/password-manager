@@ -1,39 +1,42 @@
 import "server-only";
-import { cookies, headers } from "next/headers";
+import { cache } from "react";
 
-export const getUserData = async () => {
-    const cookieStore = await cookies();
-    const headerStore = await headers();
+import ApiServer from "@/lib/axios.server";
 
-    const rawCookies = cookieStore.toString();
-    const xsrfToken = cookieStore.get("XSRF-TOKEN")?.value;
+interface User {
+    id: number;
+    username: string;
+    email: string;
+    email_verified_at: string | null;
+    created_at: string;
+    updated_at: string;
+}
 
-    const decodeXsrf = xsrfToken ? decodeURIComponent(xsrfToken) : "";
+interface UserResult {
+    user: User;
+}
 
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+export const getUserData = cache(
+    async (): Promise<UserResult | null> => {
+        try {
+            const API = await ApiServer();
 
-    const host = headerStore.get("host");
-    const protocol = headerStore.get("x-forwarded-proto");
-    const currentOrigin = `${protocol}://${host}`;
+            const res = await API.get<User>("/api/user");
 
-    try {
-        const res = await fetch(`${baseUrl}/api/user`, {
-            headers: {
-                Accept: "application/json",
-                Cookie: rawCookies,
-                "X-XSRF-TOKEN": decodeXsrf,
-                Referer: currentOrigin,
-                Origin: currentOrigin
-            },
-            cache: "no-store"
-        });
+            return {
+                user: res.data
+            };
+        } catch (err: any) {
+            if (err.response?.status === 401) {
+                return null;
+            }
 
-        if (!res.ok) {
-            console.error(res.status);
+            console.error(
+                "Laravel:",
+                err.response?.status ?? err.message
+            );
+
             return null;
         }
-        return await res.json();
-    } catch (err) {
-        console.error(err);
     }
-};
+);

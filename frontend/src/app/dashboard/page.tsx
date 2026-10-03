@@ -1,6 +1,6 @@
-import { getUserData } from "@/features/auth/services/auth.server";
+import { useUser } from "@/features/auth/components/ui/UserContext";
 
-export default async function DashPage() {
-    const user = await getUserData();
+export default function DashPage() {
+    const user = useUser();
     return <div>{JSON.stringify(user)}</div>;
 }
