@@ -6,41 +6,53 @@ import { LogoutUser } from "@/features/auth/services/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const UserMenu = () => {
-    const user = useUser();
-    const [loading, setLoading] = useState(false);
-    const router = useRouter();
+interface UserMenuProps {
+  dashButton: boolean;
+}
 
-    const handleLogout = async () => {
-        if (loading) return;
+const UserMenu = ({ dashButton = false }: UserMenuProps) => {
+  const user = useUser();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-        setLoading(true);
+  const handleLogout = async () => {
+    if (loading) return;
 
-        try {
-            await LogoutUser();
-            router.push("/auth/login");
-        } catch (err) {
-            setLoading(false);
-        }
-    };
+    setLoading(true);
 
-    if (user) {
-        return (
-            <button
-                disabled={loading}
-                onClick={handleLogout}
-                className="disabled:cursor-not-allowed hover:underline cursor-pointer"
-            >
-                {loading ? "Logging out..." : "Logout"}
-            </button>
-        );
+    try {
+      await LogoutUser();
+      router.push("/auth/login");
+    } finally {
+      setLoading(false);
     }
+  };
 
+  if (user && dashButton) {
     return (
-        <Link href="/auth/login" className="hover:underline">
-            Login
-        </Link>
+      <Link href="/dashboard" className="hover:underline">
+        Dash
+      </Link>
     );
+  }
+
+  if (user) {
+    return (
+      <button
+        disabled={loading}
+        onClick={handleLogout}
+        className="disabled:cursor-not-allowed hover:underline cursor-pointer"
+      >
+        {loading ? "Logging out..." : "Logout"}
+      </button>
+    );
+  }
+
+  return (
+    <Link href="/auth/login" className="hover:underline">
+      Login
+    </Link>
+  );
 };
 
 export default UserMenu;

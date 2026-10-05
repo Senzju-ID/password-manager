@@ -6,9 +6,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SubmitButton from "./ui/SubmitButton";
 import { useState } from "react";
+import axios from "axios";
 
 const FormLogin = () => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,6 +25,15 @@ const FormLogin = () => {
     try {
       await LoginUser(data);
       router.push("/dashboard");
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        setError(
+          err.response?.data?.errors?.password?.[0] ||
+            err.response?.data?.message,
+        );
+      } else {
+        setError("Unable to login.");
+      }
     } finally {
       setLoading(false);
     }
@@ -58,6 +69,10 @@ const FormLogin = () => {
       <SubmitButton loading={loading} loadingText="Sending...">
         Login
       </SubmitButton>
+      {/* Error Message Field */}
+      {error && (
+        <div className="mt-2 text-sm text-red-500 select-none">{error}</div>
+      )}
       {/* Dont Have Account Field */}
       <div className="mt-4 text-center select-none">
         <p className="text-sm text-primary/85">

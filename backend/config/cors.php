@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'auth/login', 'auth/register', 'auth/logout', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'auth/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 

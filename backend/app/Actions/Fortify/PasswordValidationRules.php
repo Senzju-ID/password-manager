@@ -2,7 +2,9 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 trait PasswordValidationRules
@@ -12,8 +14,18 @@ trait PasswordValidationRules
      *
      * @return array<int, Rule|array<mixed>|string>
      */
-    protected function passwordRules(): array
+    protected function passwordRules(?User $user = null): array
     {
-        return ['required', 'string', Password::default(), 'confirmed'];
+        return [
+            'required',
+            'string',
+            Password::default(),
+            'confirmed',
+            function ($attribute, $value, $fail) use ($user) {
+                if ($user && Hash::check($value, $user->password)) {
+                    $fail(__('The new password must be different from your current password.'));
+                }
+            },
+        ];
     }
 }

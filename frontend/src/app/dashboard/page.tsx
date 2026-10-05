@@ -1,3 +1,4 @@
+"use client";
 import { useUser } from "@/features/auth/components/ui/UserContext";
 
 export default function DashPage() {

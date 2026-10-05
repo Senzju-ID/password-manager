@@ -10,6 +10,7 @@ import Link from "next/link";
 
 const FormRegister = () => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,13 +19,22 @@ const FormRegister = () => {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const password = formData.get("password") as string;
+    const password_confirmation = formData.get(
+      "password_confirmation",
+    ) as string;
+
+    if (password !== password_confirmation) {
+      setError("Passwords do not match.");
+      setLoading(false);
+      return;
+    }
     const data = Object.fromEntries(
       formData.entries(),
     ) as unknown as RegisterUserProps;
 
     try {
       await RegisterUser(data);
-      alert("registrasi berhasil");
       router.push("/dashboard");
     } catch (err) {
       if (
@@ -33,17 +43,20 @@ const FormRegister = () => {
           err.message.includes("400") ||
           err.message.includes("409"))
       ) {
-        alert("registrasi gagal, pastikan username dan email belum digunakan");
-      } else {
-        console.error("Error occurred while registering:", err);
-        alert("registrasi gagal, terjadi kesalahan pada server");
+        setError(
+          "registrasi gagal, pastikan username dan email belum digunakan",
+        );
       }
     } finally {
       setLoading(false);
     }
   };
   return (
-    <FormAuth onSubmit={handleSubmit} title="Create Your Account" description="Please fill out to complete your register">
+    <FormAuth
+      onSubmit={handleSubmit}
+      title="Create Your Account"
+      description="Please fill out to complete your register"
+    >
       {/* Username Input Field */}
       <FormField
         id="username"
@@ -87,6 +100,10 @@ const FormRegister = () => {
       <SubmitButton loading={loading} loadingText="Creating...">
         Create Account
       </SubmitButton>
+      {/* Error Message Field */}
+      {error && (
+        <div className="mt-2 text-sm text-red-500 select-none">{error}</div>
+      )}
       {/* Already Have Account Field */}
       <div className="mt-4 text-center select-none">
         <p className="text-sm text-primary/85">
