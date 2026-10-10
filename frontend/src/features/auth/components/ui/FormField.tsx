@@ -8,9 +8,11 @@ interface FormFieldProps {
     name: string;
     label: string;
     type?: "text" | "email" | "password";
-    placeholder: string;
+    placeholder?: string;
     required?: boolean;
     autoComplete?: string;
+    value?: string;
+    disabled?: boolean;
 }
 
 const FormField = ({
@@ -19,8 +21,10 @@ const FormField = ({
     label,
     type,
     placeholder,
-    required,
-    autoComplete
+    required = false,
+    autoComplete,
+    value,
+    disabled = false,
 }: FormFieldProps) => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -43,6 +47,8 @@ const FormField = ({
                     autoComplete={autoComplete}
                     required={required}
                     placeholder={placeholder}
+                    value={value}
+                    disabled={disabled}
                 />
                 {isPassword && (
                     <ButtonToggle

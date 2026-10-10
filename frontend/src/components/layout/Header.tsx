@@ -9,8 +9,8 @@ const Header = ({ dashButton = false }: HeaderProps) => {
   return (
     <header className="bg-surface text-primary p-4 shadow-md w-full">
       <div className="flex justify-between items-center ">
-        <p className="text-xl cursor-default select-none font-bold">PassZju</p>
-        <div className="flex gap-4 text-sm items-center font-medium pr-4 sm:pr-0">
+        <p className="text-xl cursor-default select-none font-bold">Passzju</p>
+        <div className="flex gap-4 text-sm items-center font-medium pr-2 sm:pr-0">
           <ThemeSwitch sizeIcon={22} border={false} />
           <UserMenu dashButton={dashButton} />
         </div>

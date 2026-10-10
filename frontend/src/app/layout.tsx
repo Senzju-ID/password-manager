@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "PassZju",
+	title: "Passzju",
 	description: "Your secure password manager",
 };
 

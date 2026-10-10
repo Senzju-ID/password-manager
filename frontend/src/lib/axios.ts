@@ -1,26 +1,48 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios";
+import axios, {
+  type AxiosInstance,
+  type InternalAxiosRequestConfig,
+} from "axios";
+
+type RetryConfig = InternalAxiosRequestConfig & {
+  _csrfRetry?: boolean;
+};
 
 const ApiClient: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: "/_bridge",
   withCredentials: true,
   withXSRFToken: true,
-
   headers: {
-    "X-Requested-With": "XMLHttpRequest",
     Accept: "application/json",
     "Content-Type": "application/json",
+    "X-Requested-With": "XMLHttpRequest",
   },
 });
 
+let csrfReady = false;
 let csrfPromise: Promise<void> | null = null;
 
-const getCsrfCookie = async (): Promise<void> => {
+const isCsrfEndpoint = (url?: string) =>
+  url?.includes("/sanctum/csrf-cookie") ?? false;
+
+export const getCsrfCookie = (
+  forceRefresh = false,
+): Promise<void> => {
+  if (csrfReady && !forceRefresh) {
+    return Promise.resolve();
+  }
+
   if (csrfPromise) {
     return csrfPromise;
   }
 
   csrfPromise = ApiClient.get("/sanctum/csrf-cookie")
-    .then(() => undefined)
+    .then(() => {
+      csrfReady = true;
+    })
+    .catch((error) => {
+      csrfReady = false;
+      throw error;
+    })
     .finally(() => {
       csrfPromise = null;
     });
@@ -28,29 +50,43 @@ const getCsrfCookie = async (): Promise<void> => {
   return csrfPromise;
 };
 
+ApiClient.interceptors.request.use(async (config) => {
+  const method = config.method?.toLowerCase();
+
+  const requiresCsrf = ["post", "put", "patch", "delete"].includes(
+    method ?? "",
+  );
+
+  if (requiresCsrf && !isCsrfEndpoint(config.url)) {
+    await getCsrfCookie();
+  }
+
+  return config;
+});
+
 ApiClient.interceptors.response.use(
   (response) => response,
-
   async (error) => {
-    const originalRequest = error.config as
-      | (InternalAxiosRequestConfig & { _csrfRetry?: boolean })
-      | undefined;
+    const request = error.config as RetryConfig | undefined;
 
     if (
-      error.response?.status === 419 &&
-      originalRequest &&
-      !originalRequest._csrfRetry
+      error.response?.status !== 419 ||
+      !request ||
+      request._csrfRetry ||
+      isCsrfEndpoint(request.url)
     ) {
-      originalRequest._csrfRetry = true;
-
-      await getCsrfCookie();
-
-      return ApiClient(originalRequest);
+      return Promise.reject(error);
     }
 
-    return Promise.reject(error);
+    request._csrfRetry = true;
+
+    try {
+      await getCsrfCookie(true);
+      return await ApiClient(request);
+    } catch {
+      return Promise.reject(error);
+    }
   },
 );
 
-export { getCsrfCookie };
 export default ApiClient;

@@ -68,6 +68,15 @@ return (
         onSubmit={handleSubmit}  
         showBack={false}  
     >  
+        {/* Hidden Inputs for Email */}
+        <FormField 
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+            value={email}
+            disabled={true}
+        />
         {/* Password Input Field */}  
         <FormField  
             id="password"  

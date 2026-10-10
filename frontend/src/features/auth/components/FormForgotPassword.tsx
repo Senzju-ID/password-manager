@@ -67,6 +67,7 @@ const FormForgotPassword = () => {
   return (
     <FormAuth
       onSubmit={handleSubmit}
+      showBack={false}
       title="Forgot your password??"
       description="Enter your email to reset your password"
     >
@@ -85,6 +86,14 @@ const FormForgotPassword = () => {
       </SubmitButton>
 
       {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
+      <div className="select-none text-center mt-2">
+        <Link
+          href="/auth/login"
+          className="text-sm text-accent hover:underline text-center"
+        >
+          Back to login
+        </Link>
+      </div>
     </FormAuth>
   );
 };

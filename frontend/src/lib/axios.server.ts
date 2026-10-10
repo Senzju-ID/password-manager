@@ -45,7 +45,7 @@ const ApiServer = async (cookie?: string) => {
 
     return axios.create({
 
-        baseURL: process.env.NEXT_PUBLIC_API_URL,
+        baseURL: process.env.LARAVEL_API_URL,
 
         headers: {
 
