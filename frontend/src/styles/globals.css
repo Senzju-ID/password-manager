@@ -3,34 +3,58 @@
 @custom-variant light (&:where(.light *));
 
 @theme {
-	--vault-bg: #0d0e12;
-	--vault-surface: #161a23;
-	--vault-text-primary: #e5e7eb;
-	--vault-text-secondary: #9ca3af;
-	--vault-accent: #10b981;
+  --vault-bg: #0d0e12;
+  --vault-surface: #161a23;
+  --vault-text-primary: #e5e7eb;
+  --vault-text-secondary: #9ca3af;
+  --vault-accent: #10b981;
+
+  /* Small UI elements */
+  --vault-ui: #202530;
+  --vault-ui-border: #343b49;
 }
 
 @theme inline {
-	--color-primary: var(--vault-bg);
-	--color-surface: var(--vault-surface);
-	--text-color-primary: var(--vault-text-primary);
-	--text-color-secondary: var(--vault-text-secondary);
-	--color-accent: var(--vault-accent);
+  --color-primary: var(--vault-bg);
+  --color-surface: var(--vault-surface);
+  --color-ui: var(--vault-ui);
+  --color-ui-border: var(--vault-ui-border);
+  --text-color-primary: var(--vault-text-primary);
+  --text-color-secondary: var(--vault-text-secondary);
+  --color-accent: var(--vault-accent);
 }
 
 .light {
-	--vault-bg: #f2f2f0;
-	--vault-surface: #ffffff;
-	--vault-text-primary: #1e2022;
-	--vault-text-secondary: #575c66;
-	--vault-accent: #059669;      
+  --vault-bg: #f8f9fa;
+  --vault-surface: #ffffff;
+  --vault-text-primary: #1e2022;
+  --vault-text-secondary: #575c66;
+  --vault-accent: #059669;
+
+  /* Small UI elements */
+  --vault-ui: #f0f1f3;
+  --vault-ui-border: #d1d5db;
 }
 
 @layer base {
-	body {
-		background-color: var(--color-primary);
-		color: var(--text-color-primary);
-		font-family: Arial, Helvetica, sans-serif;
-		transition: background-color 0.4s ease, color 0.4s ease;
-	}
+  body {
+    background-color: var(--color-primary);
+    color: var(--text-color-primary);
+    font-family: Arial, Helvetica, sans-serif;
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease,
+      fill 0.3s ease,
+      stroke 0.3s ease,
+      box-shadow 0.3s ease;
+  }
 }

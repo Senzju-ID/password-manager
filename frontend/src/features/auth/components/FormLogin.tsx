@@ -51,7 +51,7 @@ const FormLogin = () => {
         name="email"
         label="Email"
         type="email"
-        placeholder="Enter your email"
+        placeholder="example@gmail.com"
         autoComplete="email"
         required
       />

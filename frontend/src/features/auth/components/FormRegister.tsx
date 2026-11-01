@@ -63,7 +63,7 @@ const FormRegister = () => {
         name="username"
         label="Username"
         type="text"
-        placeholder="Enter your username"
+        placeholder="AwesomeUser"
         required
       />
       {/* Email Input Field */}
@@ -72,7 +72,7 @@ const FormRegister = () => {
         name="email"
         label="Email"
         type="email"
-        placeholder="Enter your email"
+        placeholder="example@gmail.com"
         autoComplete="email"
         required
       />

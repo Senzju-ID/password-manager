@@ -32,14 +32,14 @@ const FormAuth = ({
           {"<--Back"}
         </ButtonToggle>
       )}
-      <ThemeSwitch className="absolute top-4 right-4" sizeIcon={20} />
+      <ThemeSwitch className="absolute top-4 right-4" sizeIcon={22} />
       <div className="w-full max-w-sm z-10">
         <div className="mb-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
           <p className="mt-1.5 text-base text-secondary">{description}</p>
         </div>
         <form
-          className={` ${showborder ? " bg-surface border border-white/6 light:border-black/15 rounded-xl p-6 pb-5" : ""} ${className} `}
+          className={` ${showborder ? " bg-surface border border-ui-border rounded-xl p-6 pb-5" : ""} ${className} `}
           method="POST"
           onSubmit={onSubmit}
           noValidate

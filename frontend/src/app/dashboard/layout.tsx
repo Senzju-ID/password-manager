@@ -15,7 +15,7 @@ export default async function MainLayout({
   }
 
   return (
-    <UserProvider user={result.user}>
+     <UserProvider user={result.user}>
       <Header />
       {children}
     </UserProvider>

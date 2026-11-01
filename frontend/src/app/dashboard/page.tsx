@@ -1,9 +1,11 @@
 
 export default function DashboardPage() {
     return(
-        <main>
-            <h1>Dashboard</h1>
-            <p>Welcome to your dashboard!</p>
+        <main className="flex flex-col px-4 py-2 gap-4">
+            <div className="">
+                <p>wellcome dashboard you are logged in</p>
+            </div>
         </main>
     )
 }
+ 
