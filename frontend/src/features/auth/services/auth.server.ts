@@ -2,15 +2,7 @@ import "server-only";
 import { cache } from "react";
 import axios from "axios";
 import ApiServer from "@/lib/axios.server";
-
-interface User {
-  id: number;
-  username: string;
-  email: string;
-  email_verified_at: string | null;
-  created_at: string;
-  updated_at: string;
-}
+import { User } from "@/context/UserContext";
 
 interface UserResult {
   user: User;

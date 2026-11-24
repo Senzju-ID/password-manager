@@ -2,13 +2,14 @@
 
 import { createContext, useContext } from "react";
 
-interface User {
+export interface User {
     id: number;
     username: string;
     email: string;
-    email_verified_at: string | null;
-    created_at: string;
-    updated_at: string;
+    role?: string;
+    email_verified_at?: string | null;
+    created_at?: string;
+    updated_at?: string;
 }
 
 const UserContext = createContext<User | null>(null);

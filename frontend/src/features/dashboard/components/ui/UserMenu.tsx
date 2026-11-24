@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/features/auth/components/ui/UserContext";
+import { useUser } from "@/context/UserContext";
 import { LogoutUser } from "@/features/auth/services/auth";
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ interface UserMenuProps {
 }
 
 const UserMenu = ({ dashButton = false }: UserMenuProps) => {
-  const user = useUser();
+  const { user } = useUser();
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -54,10 +54,10 @@ const UserMenu = ({ dashButton = false }: UserMenuProps) => {
   };
 }, []);
 
-  const handleNavigate = (path: string) => {
-  setOpen(false);
-  router.push(path);
-};
+  const handleNavigate = (href: string) => {
+    setOpen(false);
+    router.push(href as Parameters<typeof router.push>[0]);
+  };
 
   const handleLogout = async () => {
     if (loading) return;
@@ -123,9 +123,9 @@ const UserMenu = ({ dashButton = false }: UserMenuProps) => {
                 </div>
                 <div>
                   <p className="text-base font-semibold text-primary">
-                    {user.username}
+                    {user?.username}
                   </p>
-                  <p className="text-xs text-secondary">{user.email}</p>
+                  <p className="text-xs text-secondary">{user?.email}</p>
                 </div>
               </div>
               <span className="block border-b border-ui-border" />

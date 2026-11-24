@@ -1,4 +1,4 @@
-import { UserProvider } from "@/features/auth/components/ui/UserContext";
+import { UserProvider } from "@/context/UserContext";
 import { getUserData } from "@/features/auth/services/auth.server";
 import { redirect } from "next/navigation";
 
